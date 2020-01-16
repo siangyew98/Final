@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addProductForm" (ngSubmit)="add()">
+
+    <!--Name-->
+    <ion-item>
+      <ion-label>Name</ion-label>
+
+      <ion-input formControlName="name"></ion-input>
+      <ion-label *ngIf="addProductForm.controls.name.errors && submitted" color="danger">
+        Name is required
+      </ion-label>
+    </ion-item>
+
+    <!--Image-->
+    <ion-item>
+      <ion-label>Image</ion-label>
+      <ion-input type="file" accept="image/*" formControlName="image" (change)=changeFile($event)></ion-input>
+    </ion-item>
+
+    <!--Description-->
+    <ion-item>
+      <ion-label>Description</ion-label>
+
+      <ion-input formControlName="description"></ion-input>
+      <ion-label *ngIf="addProductForm.controls.description.errors && submitted" color="danger">
+        Description is required
+      </ion-label>
+    </ion-item>
+
+    <!--Quantity-->
+    <ion-item>
+      <ion-label>Quantity</ion-label>
+
+      <ion-input formControlName="quantity"></ion-input>
+      <ion-label *ngIf="addProductForm.controls.quantity.errors && submitted" color="danger">
+        Quantity is required
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="image != null">
+
+      <img [src]="image" class="image-card">
+
+    </ion-item>
+
+    <ion-button expand="block" color="tertiary" type="submit">Add</ion-button>
+
+
+
+  </form>
+
+  {{addProductForm.value.name}}
+  {{addProductForm.value.description}}
+  {{addProductForm.value.quantity}}
+</ion-content>
