@@ -99,4 +99,10 @@ export class FirebaseProductService {
       date: product.date
     });
   }
+
+  delete(product: Product) {
+    const db = firebase.firestore();
+    const itemRef = db.collection('products/').doc(product.id);
+    itemRef.delete();
+  }
 }
