@@ -14,11 +14,8 @@ export class AuthService {
     firebase.auth().onAuthStateChanged((firebaseUser: firebase.User) => {
 
       if (firebaseUser) {
-
           this.user.email = firebaseUser.email;
-
       } else {
-
           this.user.email = '';
 
       }

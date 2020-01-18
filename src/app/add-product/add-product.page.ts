@@ -44,6 +44,8 @@ export class AddProductPage implements OnInit {
         this.addProductForm.value.quantity,
         imageName,
         d.getTime());
+        
+      prod.imageFile = this.imageFile;
       this.productService.add(prod);
       this.router.navigate(['/list']);
     }
@@ -59,6 +61,4 @@ export class AddProductPage implements OnInit {
       this.image = fileReader.result;
     };
   }
-
-
 }
