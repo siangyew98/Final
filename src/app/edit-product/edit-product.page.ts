@@ -23,11 +23,15 @@ export class EditProductPage implements OnInit {
     const product = this.productService.getProductById(this.productId);
     this.productImage = product.image;
     this.submitted = false;
+
+    //Apparently product is working fine?!
+    console.log(product);
+    
     this.editProductForm = new FormGroup({
       name: new FormControl(product.name, [Validators.required]),
       description: new FormControl(product.description, [Validators.required]),
       quantity: new FormControl(product.quantity, [Validators.required]),
-    });
+    })
   }
 
   update() {
@@ -47,5 +51,4 @@ export class EditProductPage implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -9,33 +9,36 @@
 
 <ion-content>
   <img [src]=productImage alt="" class="image-card">
-  <form [formGroup]="editProductForm" (ngSubmit)= "update()">
-      <!--Name-->
-      <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-input formControlName="name"></ion-input>
-      </ion-item>
+  <form [formGroup]="editProductForm" (ngSubmit)="update()">
+    <!--Name-->
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+      <ion-label *ngIf="editProductForm.controls.name.errors && submitted" color="danger">
+        Name is required
+      </ion-label>
+    </ion-item>
 
-      <!--Description-->
-      <ion-item>
-        <ion-label>Description</ion-label>
-        <ion-input formControlName="description"></ion-input>
-        <ion-label *ngIf="addProductForm.controls.description.errors && submitted" color="danger">
-          Description is required
-        </ion-label>
-      </ion-item>
+    <!--Description-->
+    <ion-item>
+      <ion-label>Description</ion-label>
 
-      <!--Quantity-->
-      <ion-item>
-        <ion-label>Quantity</ion-label>
+      <ion-input formControlName="description"></ion-input>
+      <ion-label *ngIf="editProductForm.controls.description.errors && submitted" color="danger">
+        Description is required
+      </ion-label>
+    </ion-item>
 
-        <ion-input formControlName="quantity"></ion-input>
-        <ion-label *ngIf="addProductForm.controls.quantity.errors && submitted" color="danger">
-          Quantity is required
-        </ion-label>
-      </ion-item>
-      
-      <ion-button expand="block" color="tertiary" type="submit">Update</ion-button>
-  
-    </form>
+    <!--Quantity-->
+    <ion-item>
+      <ion-label>Quantity</ion-label>
+
+      <ion-input formControlName="quantity"></ion-input>
+      <ion-label *ngIf="editProductForm.controls.quantity.errors && submitted" color="danger">
+        Quantity is required
+      </ion-label>
+    </ion-item>
+
+    <ion-button expand="block" color="tertiary" type="submit">Update</ion-button>
+  </form>
 </ion-content>

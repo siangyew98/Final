@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
+import { ToastController, ModalController } from '@ionic/angular';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SignupPage } from '../signup/signup.page';
-import { ToastController, ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -11,12 +11,11 @@ import { ToastController, ModalController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  
   loginForm: FormGroup;
   loginError: string;
 
-  constructor(private authService: AuthService, private toastController: ToastController, private modalController: ModalController)
-  {
+  constructor(private authService: AuthService, private toastController: ToastController, private modalController: ModalController) 
+  { 
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl('')
@@ -39,6 +38,7 @@ export class LoginPage implements OnInit {
             position: 'top',
             color: 'secondary'
           });
+
           toast.present();
           this.dismiss();
         }
@@ -47,7 +47,6 @@ export class LoginPage implements OnInit {
       error => this.loginError = error.message
     );
   }
-
   async goToSignup(){
     this.dismiss();
     const modal = await this.modalController.create({
@@ -55,5 +54,4 @@ export class LoginPage implements OnInit {
     });
     return await modal.present();
   }
-
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseProductService } from '../shared/services/firebase-product.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Product } from '../shared/models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -14,7 +15,7 @@ export class AddProductPage implements OnInit {
   image: string | ArrayBuffer;
   imageFile: File;
 
-  constructor(private productService: FirebaseProductService)
+  constructor(private productService: FirebaseProductService, private router: Router)
   {
     this.addProductForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -44,6 +45,7 @@ export class AddProductPage implements OnInit {
         imageName,
         d.getTime());
       this.productService.add(prod);
+      this.router.navigate(['/list']);
     }
   }
 
