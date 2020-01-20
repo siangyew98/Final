@@ -24,7 +24,7 @@ export class FirebaseProductService {
       productsRef.get().then(itemsSnapshot => {
         this.allProducts = []; // Empty array
         itemsSnapshot.forEach(doc => {
-          const p = new Product(doc.data().name, doc.data().description, doc.data().quantity, doc.data().image, doc.data().date);
+          const p = new Product(doc.data().name, doc.data().price, doc.data().description, doc.data().quantity, doc.data().image, doc.data().date);
           p.id = doc.id;
              // Read from Firebase Storage
              // Get the image download URL
@@ -64,6 +64,7 @@ export class FirebaseProductService {
       // Add to Database
       productsRef.add({
         name: product.name,
+        price: product.price,
         description: product.description,
         quantity: product.quantity,
         image: product.image,
@@ -94,6 +95,7 @@ export class FirebaseProductService {
     // Image and vegetarian is not updated in this simple example
     itemRef.update({
       name: product.name,
+      price: product.price,
       description: product.description,
       quantity: product.quantity,
       date: product.date

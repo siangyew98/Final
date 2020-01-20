@@ -37,6 +37,7 @@
             <img [src]=item.image alt="" class="image-card">
   
             <div>Name: {{item.name}}</div>
+            <div>Unit Price: {{item.price | currency}}</div>
             <div>Quantity: {{item.quantity}}</div>
             <div>Last Updated: {{item.date | date:'medium'}}</div> 
   

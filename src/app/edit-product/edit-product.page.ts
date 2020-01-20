@@ -16,7 +16,18 @@ export class EditProductPage implements OnInit {
   editProductForm: FormGroup;
   submitted: boolean;
 
-
+  static positiveNumber(fc: FormControl)
+  {
+   if (fc.value <= 0) {
+ 
+     return ({ positiveNumber: true });
+ 
+   } else {
+ 
+     return (null);
+ 
+   }
+  }
   constructor(private productService: FirebaseProductService, private route: ActivatedRoute, private router: Router)
   { 
     this.productId = this.route.snapshot.params.id;
@@ -26,6 +37,7 @@ export class EditProductPage implements OnInit {
     
     this.editProductForm = new FormGroup({
       name: new FormControl(product.name, [Validators.required]),
+      price: new FormControl(product.price, [EditProductPage.positiveNumber]),
       description: new FormControl(product.description, [Validators.required]),
       quantity: new FormControl(product.quantity, [Validators.required]),
     })
@@ -36,6 +48,7 @@ export class EditProductPage implements OnInit {
     var d = new Date();
     if (this.editProductForm.valid) {
       const prod = new Product(this.editProductForm.value.name,
+        this.editProductForm.value.price,
         this.editProductForm.value.description,
         this.editProductForm.value.quantity,
         this.productImage,

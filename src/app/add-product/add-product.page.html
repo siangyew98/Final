@@ -19,7 +19,16 @@
         Name is required
       </ion-label>
     </ion-item>
-
+    <!--Price-->
+    <ion-item>
+      <ion-label>Unit Price</ion-label>
+      <ion-input type="number" formControlName="price"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="addProductForm.controls.price.errors && submitted">
+      <ion-label color="danger">
+        Price must be positive
+      </ion-label>
+    </ion-item>
     <!--Image-->
     <ion-item>
       <ion-label>Image</ion-label>
@@ -57,8 +66,4 @@
 
 
   </form>
-
-  {{addProductForm.value.name}}
-  {{addProductForm.value.description}}
-  {{addProductForm.value.quantity}}
 </ion-content>

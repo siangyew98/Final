@@ -19,6 +19,14 @@
       </ion-label>
     </ion-item>
 
+    <ion-item>
+      <ion-label>Unit Price</ion-label>
+      <ion-input formControlName="price"></ion-input>
+      <ion-label *ngIf="editProductForm.controls.price.errors && submitted" color="danger">
+        price is required
+      </ion-label>
+    </ion-item>
+
     <!--Description-->
     <ion-item>
       <ion-label>Description</ion-label>

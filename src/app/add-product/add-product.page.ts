@@ -15,10 +15,22 @@ export class AddProductPage implements OnInit {
   image: string | ArrayBuffer;
   imageFile: File;
 
+  static positiveNumber(fc: FormControl)
+  {
+    if (fc.value <= 0)
+    {
+      return ({positiveNumber: true});
+    }
+    else
+    {
+      return (null);
+    }
+  }
   constructor(private productService: FirebaseProductService, private router: Router)
   {
     this.addProductForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
+      price: new FormControl(1, [AddProductPage.positiveNumber]),
       description: new FormControl('', [Validators.required]),
       quantity: new FormControl('', [Validators.required]),
       image: new FormControl()
@@ -40,6 +52,7 @@ export class AddProductPage implements OnInit {
       var d = new Date();
 
       const prod = new Product(this.addProductForm.value.name, 
+        this.addProductForm.value.price,
         this.addProductForm.value.description,
         this.addProductForm.value.quantity,
         imageName,
