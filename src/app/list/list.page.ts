@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../shared/models/product';
+import { FirebaseProductService } from '../shared/services/firebase-product.service';
+import { ToastController } from '@ionic/angular';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-list',
@@ -6,34 +10,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  products: Product[]= [];
+  
+
+  constructor(private productService: FirebaseProductService, private toastController: ToastController) {
+  }
+  
+  ionViewDidEnter() {
+    this.productService.getAllProducts().then(result => {
+      this.products = result
+    });
   }
 
   ngOnInit() {
-  }
-  // add back when alpha.4 is out
+      // add back when alpha.4 is out
   // navigate(item) {
   //   this.router.navigate(['/list', JSON.stringify(item)]);
   // }
+  }
+
+  delete(item : Product) {
+    this.productService.delete(item);
+
+    //Visually remove the item
+    for(let i = 0; i < this.products.length; i++) {
+        if (this.products[i] == item){       
+          this.products.splice(i, 1);
+        }
+    }
+  }
 }

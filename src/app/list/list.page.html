@@ -3,6 +3,15 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+        <ion-buttons slot="end">
+
+      <ion-button [routerLink]="['/add-product']">
+
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+
+      </ion-button>
+
+    </ion-buttons>
     <ion-title>
       List
     </ion-title>
@@ -11,17 +20,30 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
+    <ion-item-sliding *ngFor="let item of products">
+  
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img [src]=item.image>
+        </ion-thumbnail>
+        <ion-label>
+        <div><h2>{{item.name}}</h2></div>
+        <div>{{item.description}}</div>
+      </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="delete(item)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+
+        <ion-item-option color="success" [routerLink]="['/edit-product', item.id]">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
 </ion-content>

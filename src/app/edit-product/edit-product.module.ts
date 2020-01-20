@@ -3,19 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-import { LoginPageRoutingModule } from './login-routing.module';
-
-import { LoginPage } from './login.page';
+import { EditProductPageRoutingModule } from './edit-product-routing.module';
+import { EditProductPage } from './edit-product.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EditProductPageRoutingModule
   ],
-  declarations: [LoginPage]
+  declarations: [EditProductPage]
 })
-export class LoginPageModule {}
+export class EditProductPageModule {}
