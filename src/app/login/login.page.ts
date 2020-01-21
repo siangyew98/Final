@@ -3,6 +3,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { ToastController, ModalController } from '@ionic/angular';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SignupPage } from '../signup/signup.page';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   loginError: string;
 
-  constructor(private authService: AuthService, private toastController: ToastController, private modalController: ModalController) 
+  constructor(private authService: AuthService, private toastController: ToastController, private modalController: ModalController, private route: ActivatedRoute, private router: Router) 
   { 
     this.loginForm = new FormGroup({
       email: new FormControl(''),
@@ -41,6 +42,7 @@ export class LoginPage implements OnInit {
 
           toast.present();
           this.dismiss();
+          this.router.navigate(['/home']);
         }
       )
     .catch(
